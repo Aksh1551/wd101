@@ -1,52 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Form</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ca5959;
+            border-radius: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            
+        }
+        th, td {
+            border: 1px solid #ca9595;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ca9797;
+            border: 1px solid #ca9595;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-  <center>
-  <h1>Registration Form</h1>
-  <form id="registrationForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" required>
-    <br>
+    <script>
+        window.onload = function() 
+        {
+          
+          const dataBody = document.getElementById('dataBody');
+          var num=window.localStorage.length+1; 
+              
+          for(var i=1;i<=num;i++)
+          {
+            var myData = JSON.parse(window.localStorage.getItem(i));
+            const row = document.createElement('tr');
+          
+            const nameCell = document.createElement('td');
+            nameCell.textContent = myData.name;
+            row.appendChild(nameCell);
+          
+            const emailCell = document.createElement('td');
+            emailCell.textContent = myData.email;
+            row.appendChild(emailCell);
+          
+            const passwordCell = document.createElement('td');
+            passwordCell.textContent = myData.password;
+            row.appendChild(passwordCell);
+          
+            const dobCell = document.createElement('td');
+            dobCell.textContent = myData.dob;
+            row.appendChild(dobCell);
+          
+            const acceptTermsCell = document.createElement('td');
+            acceptTermsCell.textContent = myData.acceptTerms;
+            row.appendChild(acceptTermsCell);
+          
+            dataBody.appendChild(row);
+          }
+        };
+      </script>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" required>
-    <br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" required>
-    <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
 
-    <label for="dob">Date of Birth:</label>
-    <input type="date" id="dob" required>
-    <br>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" id="dob" required>
 
-    <label for="acceptedTerms">Accepted terms?</label>
-    <input type="checkbox" id="acceptedTerms" required>
-    <br>
-    
-    <button type="submit">Register</button>
-  </form>
-</center>
-  <br>
-  <table id="dataTable">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>DOB</th>
-        <th>Accepted terms?</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+        <label for="acceptTerms">Accept Terms:</label>
+        <input type="checkbox" name="acceptTerms" id="acceptTerms">
+        <br>
+        <center>
+        <input type="submit" value="Register">
+        </center>
+    </form>
 
-  <script src="index.js"></script>
-</body>
-</html>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Date of Birth</th>
+                <th>Accepted Terms</th>
+            </tr>
+        </thead>
+        <tbody id="dataBody">
+        </tbody>
+    </table>
+
+    <script src="index.js"></script>
